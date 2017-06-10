@@ -1,12 +1,11 @@
 import Head from 'next/head'
-import settings from '../data/settings'
 import stylesheet from '../styles/style.scss'
 import Strategies from './strategies'
 
-export default ({children, language = 'en'}) => (
+export default ({children}) => (
   <div>
     <Head>
-      <title>{ settings.text[language].siteTitle }</title>
+      <title>Meter Made Atlanta</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon-192x192.png" />
@@ -14,64 +13,54 @@ export default ({children, language = 'en'}) => (
       <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
 
-      <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet" type="text/css" />
+      <link href="https://fonts.googleapis.com/css?family=Homenaje|Muli:400,700" rel="stylesheet" />
       <style dangerouslySetInnerHTML={{__html: stylesheet}} />
+
+      <meta property="og:title" content="How would you improve transportation in Atlanta?" />
+      <meta property="og:url" content="https://metermaid.herokuapp.com" />
+      <meta property="og:site_name" content="Meter Made Atlanta"/>
     </Head>
-    <div className="container main-container">
+    <div className="container-fluid">
       <header className="row">
-        <div className="col-md-12">
-          <img className="logo" src="/static/images/logo.png" srcSet="/static/images/logo.png 1x, /static/images/logo@2x.png 2x" alt={ settings.text[language].logoAlt } />
-          <h1 className="title" dangerouslySetInnerHTML={{__html: settings.text[language].headerTitle}} />
+        <div className="col-sm-10 col-sm-offset-1">
+          <h1 className="title">Meter Made</h1>
+          <img className="logo" src="/static/images/logo.png" srcSet="/static/images/logo.png 1x, /static/images/logo@2x.png 2x" alt="Atlanta's Transportation Plan" />
         </div>
-        <div className="stripe"></div>
       </header>
 
-      <div className="row">
-        <div className="col-md-7">
-          <div className="panel panel-transparent">
-            <div className="panel-body" dangerouslySetInnerHTML={{__html: settings.text[language].introText}} />
-          </div>
-          <div className="panel panel-dark">
-            <div className="panel-body">
-              <h3>{ settings.text[language].howItWorksTitle }</h3>
-              <div className="how-it-works" dangerouslySetInnerHTML={{__html: settings.text[language].howItWorksContent}} />
+      <div className="row introduction">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-12 text-center">
+              <h2>How would you improve transportation in Atlanta?</h2>
             </div>
           </div>
-        </div>
-        <div className="col-md-5">
-          <div className="panel panel-transparent">
-            <div className="panel-body">
-              <h3>{ settings.text[language].benefitCategoriesSectionTitle} </h3>
-              <dl className="benefits-list">
-                {settings.benefitCategories.map((benefitCategory, idx) => (
-                  <span key={idx}>
-                    <dt>{ benefitCategory.text[language].title }</dt>
-                    <dd>{ benefitCategory.text[language].description }</dd>
-                  </span>
-                ))}
-              </dl>
+          <div className="row">
+            <div className="col-sm-6 col-sm-offset-1 col-md-5 col-md-offset-2">
+              <div className="introduction-text">
+                <p>You have $5 to spend on transportation projects to get as many commuters off the road as possible. Insert your $5, one dollar at a time, by clicking the meters that you think will make the biggest impact.</p>
+                <p>After making your choices with all five of your dollars, the meters will turn to reveal how much congestion your plan will reduce.</p>
+                <p>What difference will your meters make?</p>
+              </div>
             </div>
-          </div>
-
-          <div className="panel panel-light translation-content">
-            <a href={ settings.text[language].translationUrl }>{ settings.text[language].translationContent }</a>
+            <div className="col-sm-4 text-center">
+              <img className="logo" src="/static/images/example.png" srcSet="/static/images/example.png 1x, /static/images/example@2x.png 2x" className="example-image" alt="" />
+              <div className="example-text">For example, you could put $2 in one choice, $1 in another, and $2 in a third.</div>
+            </div>
           </div>
         </div>
       </div>
 
       { children }
-
-      <Strategies language={language} />
+      <div className="row strategies">
+        <Strategies />
+      </div>
 
       <footer className="row">
-        <div
-          className="col-md-9"
-          dangerouslySetInnerHTML={{__html: settings.text[language].footerAbout}}
-        />
-        <div
-          className="col-md-3 text-right"
-          dangerouslySetInnerHTML={{__html: settings.text[language].footerCopyright}}
-        />
+        <div className="col-sm-10 col-sm-offset-1">
+          <img className="logo" src="/static/images/logo.png" srcSet="/static/images/logo.png 1x, /static/images/logo@2x.png 2x" alt="Atlanta's Transportation Plan" />
+          <h1 className="title">Meter Made</h1>
+        </div>
       </footer>
     </div>
   </div>

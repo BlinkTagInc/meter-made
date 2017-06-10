@@ -1,62 +1,32 @@
 header {
-  padding: 0 15px 10px;
+  background: $blue;
 
   .logo {
-    float: left;
-    width: 50px;
-    height: 50px;
-    margin: 5px 0;
+    float: right;
+    width: 120px;
+    height: 36px;
+    margin: 35px 0 0;
   }
 
   .title {
     margin: 0;
-    padding: 8px 0 0 60px;
-    font-size: 22px;
-
-    .subtitle {
-      font-size: 17px;
-      display: block;
-    }
-  }
-
-  .stripe {
-    height: 7px;
-    clear: both;
-    background: $active-selection;
+    float: left;
+    color: $white;
+    font-size: 40px;
+    line-height: 102px;
   }
 }
 
-@media (min-width: 375px) {
-  header .title {
-    padding-top: 5px;
-    .subtitle {
-      font-size: inherit;
-      display: inline;
-    }
-  }
-}
-
-@media (min-width: 550px) {
+@media (min-width: $screen-sm-min) {
   header {
-    .title {
-      padding: 19px 0 0 69px;
-    }
-  }
-}
-
-@media (min-width: $screen-md-min) {
-  header {
-    padding: 0 0 15px;
-
     .logo {
-      width: 90px;
-      height: 90px;
+      width: 206px;
+      height: 63px;
+      margin: 20px 0;
     }
 
     .title {
-      padding: 29px 0 0 120px;
-      font-size: 36px;
-      float: none;
+      font-size: 54px;
     }
   }
 }

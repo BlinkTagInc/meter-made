@@ -13,8 +13,7 @@ module.exports = (request, reply) => {
       'id',
       'timestamp',
       'ip',
-      'userAgent',
-      'language'
+      'userAgent'
     ].concat(strategies.map(strategy => strategy.key))
 
     return json2csv({

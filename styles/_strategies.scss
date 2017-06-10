@@ -1,178 +1,245 @@
-.section-title {
-  h3 {
-    font-size: 20px;
-    margin: 10px 15px;
+.strategies {
+  background-image: linear-gradient(110deg, #EDE9E0 11%, #D6D2C8 85%);
+
+  .strategy-list {
+    max-width: 766px;
+    margin-bottom: 20px;
   }
-}
 
-.strategy {
-  margin-bottom: 5px;
+  .strategy {
+    display: inline-block;
+    padding: 5px 20px 5px 0;
+    width: 50%;
+    text-align: left;
+    border: none;
+    background: none;
 
-  .strategy-info {
-    background: $inactive-selection;
-    margin-bottom: 0;
-    font-weight: normal;
-    cursor: pointer;
-    display: block;
-    min-height: 85px;
-    padding: 5px 0;
-
-    .strategy-input {
+    .strategy-meter {
+      width: 48px;
+      height: 80px;
       float: left;
-      margin: 31px 10px;
-    }
-
-    .strategy-image {
-      width: 75px;
-      height: 75px;
-      float: left;
+      position: relative;
+      overflow: hidden;
       margin-right: 10px;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .strategy-meter-value {
+        top: 1px;
+        transition: transform 400ms cubic-bezier(.91,.45,.71,1.39);
+      }
+
+      &.strategy-funding-zero .strategy-meter-value {
+        transform: rotate(180deg);
+      }
+
+      &.strategy-funding-one .strategy-meter-value {
+        transform: rotate(216deg);
+      }
+
+      &.strategy-funding-two .strategy-meter-value {
+        transform: rotate(252deg);
+      }
+
+      &.strategy-funding-three .strategy-meter-value {
+        transform: rotate(288deg);
+      }
+
+      &.strategy-funding-four .strategy-meter-value {
+        transform: rotate(324deg);
+      }
+
+      &.strategy-funding-five .strategy-meter-value {
+        transform: rotate(0deg);
+      }
+
+      .strategy-meter-handle {
+        top: 30px;
+        left: 29.5px;
+        width: 3px;
+        height: 20px;
+        background: #E2DED5;
+        position: absolute;
+        transform: rotate(0deg);
+        transition: transform 400ms cubic-bezier(.91,.45,.71,1.39);
+
+        &.twisted {
+          transform: rotate(360deg);
+        }
+      }
     }
 
     .strategy-title {
-      margin: 5px 10px 4px;
-    }
-
-    .strategy-description {
-      padding: 0 10px 5px;
-      font-size: 13px;
-    }
-  }
-
-  .strategy-benefits {
-    background: $inactive-selection;
-    height: 85px;
-    padding: 5px 0;
-    text-align: center;
-
-    .benefit,
-    .cost {
-      width: 60px;
-      margin: 5px 1px;
-      height: 65px;
-      display: inline-block;
-      vertical-align: top;
-
-      .benefit-title,
-      .cost-title {
-        font-size: 10px;
-        text-align: center;
-        height: 28px;
-        vertical-align: bottom;
-      }
-
-      .benefit-bars-container {
-        height: 40px;
-        position: absolute;
-
-        .benefit-bars {
-          position: absolute;
-          bottom: 5px;
-          width: 60px;
-
-          .bar {
-            width: 100%;
-            height: 8px;
-            background: $value-bars;
-            margin-bottom: 2px;
-          }
-        }
-      }
-
-      .cost-signs {
-        text-align: center;
-        font-weight: bold;
-        color: $green;
-        font-size: 20px;
-      }
-    }
-  }
-
-  &.selected {
-    .strategy-info {
-      background: $active-selection;
-      color: $white;
-    }
-
-    .strategy-benefits {
-      background: $active-selection;
-      color: $white;
-
-      .cost-signs {
-        color: $white;
-      }
+      margin-top: 16px;
+      font-size: 10px;
     }
   }
 }
 
+.results {
+  height: 546px;
+  overflow: hidden;
+  transition: height 400ms cubic-bezier(.91,.45,.71,1.39);
 
-@media (min-width: 345px) {
-  .strategy {
-    .strategy-benefits {
-      .benefit,
-      .cost {
-        margin: 5px 4px;
-      }
+  &.slide-hide {
+    height: 0;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .score {
+    font-size: 80px;
+  }
+
+  .score-summary {
+    margin: 30px 0 20px;
+  }
+
+  .try-again-buttom {
+    margin-bottom: 20px;
+  }
+
+  .score-container {
+    margin-top: 20px;
+  }
+
+  .summary-meter-container {
+    overflow: hidden;
+  }
+
+  .summary-meter {
+    width: 48px;
+    height: 80px;
+    margin: 30px 0 0 20px;
+    position: relative;
+    overflow: hidden;
+    float: left;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .summary-meter-value {
+      top: 1px;
+      fill: $blue;
+      transition: transform 400ms cubic-bezier(.91,.45,.71,1.39);
+    }
+
+    .summary-meter-handle {
+      top: 30px;
+      left: 29.5px;
+      width: 3px;
+      height: 20px;
+      background: #E2DED5;
+      position: absolute;
+      transform: rotate(0deg);
+      transition: transform 400ms cubic-bezier(.91,.45,.71,1.39);
+    }
+  }
+
+  .summary-meter-text {
+    margin-top: 60px;
+    float: right;
+    width: 122px;
+  }
+
+  .share-buttons {
+    margin-top: 15px;
+
+    .btn:first-child {
+      margin-right: 10px;
     }
   }
 }
 
 @media (min-width: 375px) {
-  .strategy {
-    .strategy-benefits {
-      .benefit,
-      .cost {
-        margin: 5px 7px;
+  .strategies {
+    .strategy {
+      .strategy-title {
+        font-size: 14px;
       }
+    }
+  }
+
+  .results {
+
+    h2 {
+      font-size: 30px;
+    }
+
+    .summary-meter-text {
+      width: auto;
     }
   }
 }
 
-@media (min-width: $screen-md-min) {
-  .section-title {
-    h3 {
-      margin-left: 0;
-      margin-right: 0;
+@media (min-width: $screen-sm-min) {
+  .strategies {
+
+    .strategy-list {
+      margin: 0 auto 20px;
+    }
+
+    .strategy {
+      text-align: center;
+      margin: 16px 13px 4px;
+      width: 120px;
+
+      .strategy-meter {
+        width: 105px;
+        height: 173px;
+        margin: 0 auto 8px;
+
+        .strategy-meter-handle {
+          top: 66px;
+          left: 63.7px;
+          width: 7.4px;
+          height: 41px;
+        }
+      }
+
+      .strategy-title {
+        margin-top: 0;
+      }
     }
   }
 
-  .strategy {
-    background: $inactive-selection;
+  .results {
+    height: 315px;
 
-    &.selected {
-      background: $active-selection;
+    .score {
+      font-size: 100px;
     }
 
-    .strategy-info {
-      .strategy-input {
-        margin: 31px 10px 31px 5px;
-      }
+    .score-summary {
+      margin: 50px 0 20px;
     }
 
-    .strategy-benefits {
+    .summary-meter {
+      width: 108px;
+      height: 173px;
+      margin: 0 auto 8px;
+      float: none;
 
-      .benefit,
-      .cost {
-        margin: 5px 7px;
-
-        &:first-child {
-          margin-left: 0;
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
+      .summary-meter-handle {
+        top: 67px;
+        left: 66px;
+        width: 7.4px;
+        height: 41px;
       }
     }
 
-    .strategy-info {
-      .strategy-title {
-        margin-left: 107px;
-      }
-
-      .strategy-description {
-        margin-left: 107px;
-      }
+    .summary-meter-text {
+      margin-top: 0;
+      float: none;
     }
   }
 }

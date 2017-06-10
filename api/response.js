@@ -16,12 +16,11 @@ module.exports = (request, reply) => {
     id,
     timestamp: date.toISOString(),
     ip,
-    userAgent: request.headers['user-agent'],
-    language: body.language
+    userAgent: request.headers['user-agent']
   }
 
   strategies.forEach(strategy => {
-    responseData[strategy.key] = Boolean(body[strategy.key])
+    responseData[strategy.key] = parseInt(body[strategy.key], 10)
   })
 
   console.log(responseData)

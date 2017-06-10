@@ -1,36 +1,13 @@
-.bottom-buttons {
-  margin-top: 20px;
-}
-
-.btn-bottom {
-  text-align: center;
-  width: 50%;
-  height: 53px;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 48px;
-  cursor: pointer;
-  border: none;
-  border-radius: 0;
-}
-
-.btn-light {
-  background: $inactive-selection;
-
-  &:hover {
-    background: darken($inactive-selection, 10%);
-  }
-}
-
 .btn-dark {
-  background: $total-bar;
-  color: $black;
+  background: $blue;
+  color: $white;
 
   &:hover {
-    background: lighten($total-bar, 5%);
+    background: lighten($blue, 5%);
+    color: $white;
   }
 
   &:disabled {
-    color: lighten($total-bar, 50%);
+    color: lighten($blue, 50%);
   }
 }

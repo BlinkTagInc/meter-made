@@ -1,9 +1,7 @@
 import Dashboard from './dashboard'
-import Modal from 'react-modal'
-import settings from '../data/settings'
-import {StickyContainer, Sticky} from 'react-sticky'
 import strategies from '../data/strategies'
 import Strategy from './strategy'
+import classNames from 'classnames'
 
 require('es6-promise').polyfill()
 require('isomorphic-fetch')
@@ -13,33 +11,35 @@ export default class Strategies extends React.Component {
     super(props)
 
     this.state = {
-      selectedStrategies: {},
-      showModal: false,
-      totalCost: 0,
-      totalBenefits: this.getTotalBenefits({}),
-      modalButtons: ''
+      budgetRemaining: 5,
+      selectedStrategies: strategies.reduce((memo, strategy) => {
+        memo[strategy.key] = 0
+        return memo
+      }, {})
     }
 
-    this.toggleSelected = strategyKey => {
-      this.state.selectedStrategies[strategyKey] = !this.state.selectedStrategies[strategyKey]
-      const totalCost = this.getTotalCost(this.state.selectedStrategies)
-      const totalBenefits = this.getTotalBenefits(this.state.selectedStrategies)
-      const budgetIsValid = this.validateBudget(totalCost)
+    this.increment = strategyKey => {
+      if (this.state.budgetRemaining <= 0) {
+        return;
+      }
+
+      const budgetRemaining = this.state.budgetRemaining - 1
+      this.state.selectedStrategies[strategyKey] = this.state.selectedStrategies[strategyKey] + 1
 
       this.setState({
-        selectedStrategies: this.state.selectedStrategies,
-        totalCost,
-        totalBenefits,
-        budgetIsValid
+        budgetRemaining,
+        selectedStrategies: this.state.selectedStrategies
       })
 
-      if (!budgetIsValid) {
+      if (budgetRemaining <= 0) {
+        this.postData()
+
         this.setState({
-          showModal: true,
-          modalTitle: settings.text[this.props.language].modalExceededTitle,
-          modalContent: settings.text[this.props.language].modalExceededContent,
-          modalButtons: this.getModalButtons(['close'])
+          totalScore: this.getTotalScore()
         })
+        window.setTimeout(() => {
+          window.scrollTo(0, document.body.scrollHeight)
+        }, 500)
       }
     }
 
@@ -47,36 +47,13 @@ export default class Strategies extends React.Component {
       e.preventDefault()
 
       this.setState({
-        selectedStrategies: {},
-        totalCost: 0,
-        totalBenefits: this.getTotalBenefits({}),
-        budgetIsValid: true
+        budgetRemaining: 5,
+        totalScore: 0,
+        selectedStrategies: strategies.reduce((memo, strategy) => {
+          memo[strategy.key] = 0
+          return memo
+        }, {})
       })
-    }
-
-    this.handleResponse = response => {
-      if (settings.postSurveyURL) {
-        this.setState({
-          submitting: false,
-          showModal: true,
-          modalTitle: settings.text[this.props.language].modalPostSubmitTitle,
-          modalContent: settings.text[this.props.language].modalPostSubmitContent,
-          modalButtons: []
-        })
-
-        window.location.replace(`${settings.postSurveyURL[this.props.language]}?c=${response.id}`)
-      } else {
-        const modalButtons = (
-          <div dangerouslySetInnerHTML={{__html: settings.text[this.props.language].modalPostSubmitButtons}} />
-        )
-        this.setState({
-          submitting: false,
-          showModal: true,
-          modalTitle: settings.text[this.props.language].modalPostSubmitTitle,
-          modalContent: settings.text[this.props.language].modalPostSubmitContent,
-          modalButtons
-        })
-      }
     }
 
     this.handleError = error => {
@@ -86,48 +63,8 @@ export default class Strategies extends React.Component {
       console.error(error)
     }
 
-    this.closeModal = () => {
-      this.setState({
-        showModal: false
-      })
-    }
-
     this.submit = e => {
       e.preventDefault()
-
-      if (this.state.totalCost === 0) {
-        this.setState({
-          showModal: true,
-          modalTitle: settings.text[this.props.language].modalNoneTitle,
-          modalContent: settings.text[this.props.language].modalNoneContent,
-          modalButtons: this.getModalButtons(['close'])
-        })
-      } else if (this.state.totalCost < settings.maxCost) {
-        this.setState({
-          showModal: true,
-          modalTitle: settings.text[this.props.language].modalLeftoverTitle,
-          modalContent: settings.text[this.props.language].modalLeftoverContent,
-          modalButtons: this.getModalButtons(['goback', 'continue'])
-        })
-      } else if (this.state.totalCost > settings.maxCost) {
-        this.setState({
-          showModal: true,
-          modalTitle: settings.text[this.props.language].modalExceededTitle,
-          modalContent: settings.text[this.props.language].modalExceededContent,
-          modalButtons: this.getModalButtons(['close'])
-        })
-      } else if (this.state.totalCost === settings.maxCost) {
-        this.showSubmitModal()
-      }
-    }
-
-    this.showSubmitModal = () => {
-      this.setState({
-        showModal: true,
-        modalTitle: settings.text[this.props.language].modalSubmitTitle,
-        modalContent: settings.text[this.props.language].modalSubmitContent,
-        modalButtons: this.getModalButtons(['goback', 'submit'])
-      })
     }
 
     this.postData = () => {
@@ -135,13 +72,9 @@ export default class Strategies extends React.Component {
         submitting: true
       })
 
-      const form = Object.assign({
-        language: this.props.language
-      }, this.state.selectedStrategies)
-
       fetch('/api/response', {
         method: 'post',
-        body: JSON.stringify(form)
+        body: JSON.stringify(this.state.selectedStrategies)
       })
       .then(response => response.json())
       .then(this.handleResponse)
@@ -149,157 +82,96 @@ export default class Strategies extends React.Component {
     }
   }
 
-  getTotalCost(selectedStrategies) {
-    return strategies.reduce((cost, strategy) => {
-      if (selectedStrategies[strategy.key]) {
-        cost += strategy.cost
-      }
-      return cost
+  getTotalScore() {
+    return strategies.reduce((score, strategy) => {
+      score += strategy.weight * this.state.selectedStrategies[strategy.key]
+      return score
     }, 0)
   }
 
-  getTotalBenefits(selectedStrategies) {
-    return strategies.reduce((benefits, strategy) => {
-      settings.benefitCategories.forEach(benefitCategory => {
-        if (!benefits.hasOwnProperty(benefitCategory.key)) {
-          benefits[benefitCategory.key] = 0
-        }
-      })
-      if (selectedStrategies[strategy.key]) {
-        settings.benefitCategories.forEach(benefitCategory => {
-          benefits[benefitCategory.key] += strategy.benefits[benefitCategory.key]
-        })
-      }
-      return benefits
-    }, {})
-  }
-
-  validateBudget(totalCost) {
-    return totalCost <= settings.maxCost
-  }
-
-  getCategoryTitle(strategy, language) {
-    if (strategy.text[language].category === this.state.categoryTitle) {
-      return ''
+  getScoreSummary() {
+    if (this.state.totalScore <= 75) {
+      return 'Looks like you have some room for improvement. Give it another shot!'
+    } else if (this.state.totalScore <= 135) {
+      return 'That\'s pretty good, but we bet you can do better!'
+    } else if (this.state.totalScore <= 174) {
+      return 'Great work!'
     }
 
-    this.state.categoryTitle = strategy.text[language].category
-
-    return (
-      <div className="row section-title">
-        <div className="col-md-12">
-          <h3>{ strategy.text[language].category }</h3>
-        </div>
-      </div>
-    )
+    return 'Your plan would make a huge improvement!'
   }
 
-  getModalButtons(buttonKeys) {
-    const modalButtons = {
-      close: (
-        <button className="btn btn-default" type="button" onClick={ this.closeModal } key="close">
-          { settings.text[this.props.language].modalCloseButton }
-        </button>
-      ),
-      goback: (
-        <button className="btn btn-default" type="button" onClick={ this.closeModal } key="goback">
-          { settings.text[this.props.language].modalGoBackButton }
-        </button>
-      ),
-      continue: (
-        <button className="btn btn-primary" key="continue" onClick={ this.showSubmitModal }>
-          { settings.text[this.props.language].modalContinueButton }
-        </button>
-      ),
-      submit: (
-        <button className="btn btn-primary" key="submit" onClick={ this.postData }>
-          { settings.text[this.props.language].modalSubmitButton }
-        </button>
-      )
-    }
-
-    return buttonKeys.map(key => modalButtons[key])
+  getScoreRotation() {
+    return ((this.state.totalScore) / 175 * 180) - 180
   }
 
   render() {
-    const language = this.props.language
-
     return (
-      <StickyContainer>
-        <div className="row">
-          <Sticky>
-            {
-              (style) => {
-                return (
-                  <Dashboard
-                    style={style}
-                    language={language}
-                    totalCost={this.state.totalCost}
-                    totalBenefits={this.state.totalBenefits}
-                    budgetIsValid={this.state.budgetIsValid}
-                  />
-                )
-              }
-            }
-          </Sticky>
-        </div>
-        <form onSubmit={this.submit}>
-          {strategies.map(strategy => (
-            <div key={strategy.key}>
-              {this.getCategoryTitle(strategy, language)}
-              <Strategy
-                strategy={strategy}
-                language={language}
-                selected={Boolean(this.state.selectedStrategies[strategy.key])}
-                toggleSelected={this.toggleSelected}
-              />
-            </div>
-          ))}
+      <div className="container-fluid">
+        <Dashboard
+          budgetRemaining={this.state.budgetRemaining}
+        />
 
-          <div className="row bottom-buttons">
-            <div className="col-md-12">
-              <button
-                className="btn-bottom btn-light"
-                onClick={this.reset}
-              >{ settings.text[language].resetTitle }</button>
-              <input
-                className="btn-bottom btn-dark"
-                type="submit"
-                value={`${settings.text[language].submitTitle}`}
-                disabled={this.state.submitting}
-              />
+        <form onSubmit={this.submit}>
+          <div className="row strategy-list">
+            <div className="col-sm-10 col-sm-offset-1">
+              {strategies.map(strategy => (
+                <Strategy
+                  key={strategy.key}
+                  strategy={strategy}
+                  increment={this.increment}
+                  strategyFunding={this.state.selectedStrategies[strategy.key]}
+                  twisted={this.state.budgetRemaining > 0}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className={classNames('row', 'results', this.state.budgetRemaining ? 'slide-hide' : '')}>
+            <div className="col-xs-10 col-xs-offset-1">
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-sm-12 text-center">
+                    <h2>How did you improve transportation in Atlanta?</h2>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4 text-center score-container">
+                    <div>Your score</div>
+                    <div className="score">{this.getTotalScore()}</div>
+                    <div>Share your score</div>
+                    <div className="share-buttons">
+                      <a href="https://twitter.com/share?url=https%3A%2F%2Fmetermade.herokuapp.com&text=How%20would%20you%20improve%20transportation%20in%20Atlanta%3F" className="btn btn-dark">
+                        <i className="fa fa-twitter" aria-hidden="true"></i><br />
+                        Twitter
+                      </a>
+                      <a href="http://www.facebook.com/sharer.php?t=How%20would%20you%20improve%20transportation%20in%20Atlanta%3F&u=https%3A%2F%2Fmetermade.herokuapp.com" className="btn btn-dark">
+                        <i className="fa fa-facebook" aria-hidden="true"></i><br />
+                        Facebook
+                      </a>
+                    </div>
+                  </div>
+                  <div className="col-sm-4 text-center summary-meter-container">
+                    <div className="summary-meter">
+                      <img className="summary-meter-value" src="/static/images/meters-white-02.svg" alt="" style={{transform: `rotate(${this.getScoreRotation()}deg)`}} />
+                      <img src="/static/images/meters-white-01.svg" alt="" />
+                      <div className="summary-meter-handle" />
+                    </div>
+                    <div className="summary-meter-text">Compared to other plans</div>
+                  </div>
+                  <div className="col-sm-4 text-center">
+                    <div className="score-summary">{this.getScoreSummary()}</div>
+                    <button
+                      className="btn btn-dark btn-block try-again-buttom"
+                      onClick={this.reset}
+                    >Try Again</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </form>
-        <Modal
-          isOpen={this.state.showModal}
-          contentLabel="Modal"
-          className="modal-container"
-          style={{overlay: {zIndex: 2}}}
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button
-                  className="close"
-                  type="button"
-                  onClick={ this.closeModal }
-                  aria-label={settings.text[language].modalCloseButton}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 className="modal-title">{ this.state.modalTitle }</h4>
-              </div>
-              <div className="modal-body">
-                <p dangerouslySetInnerHTML={{__html: this.state.modalContent}} />
-              </div>
-              <div className="modal-footer">
-                { this.state.modalButtons }
-              </div>
-            </div>
-          </div>
-        </Modal>
-        </StickyContainer>
+      </div>
     )
   }
 }

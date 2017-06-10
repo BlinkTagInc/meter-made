@@ -1,20 +1,32 @@
 footer {
-  padding: 10px;
-  color: $white;
-  background-color: $active-selection;
-  margin-top: 25px;
+  background: $blue;
 
-  a {
+  .logo {
+    float: left;
+    width: 120px;
+    height: 36px;
+    margin: 35px 0 0;
+  }
+
+  .title {
+    margin: 0;
+    float: right;
     color: $white;
-
-    &:hover {
-      color: darken($white, 10%);
-    }
+    font-size: 40px;
+    line-height: 102px;
   }
 }
 
-@media (min-width: $screen-md-min) {
-  footer {
-    padding: 20px;
+@media (min-width: $screen-sm-min) {
+  header {
+    .logo {
+      width: 206px;
+      height: 63px;
+      margin: 20px 0;
+    }
+
+    .title {
+      font-size: 54px;
+    }
   }
 }

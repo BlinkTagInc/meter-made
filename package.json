@@ -1,5 +1,5 @@
 {
-  "name": "design-your-transit-system",
+  "name": "metermade",
   "author": "Brendan Nee <brendan@blinktag.com>",
   "version": "0.1.0",
   "dependencies": {
@@ -11,6 +11,7 @@
     "classnames": "2.2.5",
     "dotenv": "4.0.0",
     "es6-promise": "4.1.0",
+    "font-awesome": "^4.7.0",
     "glob": "7.1.2",
     "good": "7.2.0",
     "good-console": "6.4.0",
@@ -28,8 +29,6 @@
     "raw-loader": "0.5.1",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "react-modal": "1.7.11",
-    "react-sticky": "6.0.1",
     "sass-loader": "6.0.5"
   },
   "devDependencies": {
