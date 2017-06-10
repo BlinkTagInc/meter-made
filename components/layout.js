@@ -20,7 +20,7 @@ export default ({children}) => (
       <meta property="og:description" content="Help us choose transportation projects to get as many Atlanta commuters off the road as possible." />
       <meta property="og:url" content="https://metermade.herokuapp.com" />
       <meta property="og:site_name" content="Meter Made Atlanta" />
-      <meta property="og:image" content="https://metermade.herokuapp.com/static/images/example@2x.png" />
+      <meta property="og:image" content="https://metermade.herokuapp.com/static/images/facebook-share.png" />
     </Head>
     <div className="container-fluid">
       <header className="row">
