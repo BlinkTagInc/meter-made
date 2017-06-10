@@ -31,6 +31,8 @@
       .strategy-meter-value {
         top: 1px;
         transition: transform 400ms cubic-bezier(.91,.45,.71,1.39);
+        width: 48px;
+        height: 48px;
       }
 
       &.strategy-funding-zero .strategy-meter-value {
@@ -131,6 +133,8 @@
       top: 1px;
       fill: $blue;
       transition: transform 400ms cubic-bezier(.91,.45,.71,1.39);
+      width: 48px;
+      height: 48px;
     }
 
     .summary-meter-handle {
@@ -202,6 +206,11 @@
           width: 7.4px;
           height: 41px;
         }
+
+        .strategy-meter-value {
+          width: 105px;
+          height: 105px;
+        }
       }
 
       .strategy-title {
@@ -226,6 +235,11 @@
       height: 173px;
       margin: 0 auto 8px;
       float: none;
+
+      .summary-meter-value {
+        width: 108px;
+        height: 108px;
+      }
 
       .summary-meter-handle {
         top: 67px;
