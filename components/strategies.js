@@ -159,7 +159,6 @@ export default class Strategies extends React.Component {
                     <div className="summary-meter">
                       <img className="summary-meter-value" src="/static/images/meters-white-02.svg" alt="" style={{transform: `rotate(${this.getScoreRotation()}deg)`}} />
                       <img src="/static/images/meters-white-01.svg" alt="" />
-                      <div className="summary-meter-handle" />
                     </div>
                     <div className="summary-meter-text">Compared to other plans</div>
                   </div>
