@@ -141,11 +141,11 @@ export default class Strategies extends React.Component {
                     <div className="score">{this.getTotalScore()}</div>
                     <div>Share your score</div>
                     <div className="share-buttons">
-                      <a href="https://twitter.com/share?url=https%3A%2F%2Fmetermade.herokuapp.com&text=How%20would%20you%20improve%20transportation%20in%20Atlanta%3F&via=intercitytransi" className="btn btn-dark">
+                      <a href="https://twitter.com/share?url=https%3A%2F%2Fmetermade.herokuapp.com&text=How%20would%20you%20improve%20transportation%20in%20Atlanta%3F&via=intercitytransi" className="btn btn-dark" target="_blank">
                         <i className="fa fa-twitter" aria-hidden="true"></i><br />
                         Twitter
                       </a>
-                      <a href="http://www.facebook.com/sharer.php?t=How%20would%20you%20improve%20transportation%20in%20Atlanta%3F&u=https%3A%2F%2Fmetermade.herokuapp.com" className="btn btn-dark">
+                      <a href="http://www.facebook.com/sharer.php?t=How%20would%20you%20improve%20transportation%20in%20Atlanta%3F&u=https%3A%2F%2Fmetermade.herokuapp.com" className="btn btn-dark" target="_blank">
                         <i className="fa fa-facebook" aria-hidden="true"></i><br />
                         Facebook
                       </a>
