@@ -42,7 +42,7 @@ export default ({children}) => (
               <div className="introduction-text">
                 <p>You have $5 to spend on transportation projects to get as many commuters off the road as possible. Insert your $5, one dollar at a time, by clicking the meters that you think will make the biggest impact.</p>
                 <p>After making your choices with all five of your dollars, the meters will turn to reveal how much congestion your plan will reduce.</p>
-                <p>What difference will your meters make?</p>
+                <p>What difference will your meters make? Your responses will be used as input to the Atlanta’s Transportation Plan.</p>
               </div>
             </div>
             <div className="col-sm-4 text-center">
