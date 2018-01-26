@@ -5,9 +5,6 @@
 
 ## Description
 
-
-An exmple
-
 ## Local setup
 
 ### Install node.js and mongodb
@@ -25,9 +22,9 @@ On OS X, if you have brew installed:
 
 Create a file in the project root called `.env`. Setup values for `MONGODB_URI`, `ADMIN_USERNAME`, and `ADMIN_PASSWORD`.
 
-MONGODB_URI=mongodb://127.0.0.1:27017/yoursurveydatabase
-ADMIN_USERNAME=username
-ADMIN_PASSWORD=securepassword
+    MONGODB_URI=mongodb://127.0.0.1:27017/yoursurveydatabase
+    ADMIN_USERNAME=username
+    ADMIN_PASSWORD=securepassword
 
 The `ADMIN_USERNAME` and `ADMIN_PASSWORD` are used for bulk .csv export of survey responses.
 
