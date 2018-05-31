@@ -4,18 +4,15 @@ const HapiBasicAuth = require('hapi-auth-basic')
 const HapiRequireHttps = require('hapi-require-https')
 const Good = require('good')
 const mongoose = require('mongoose')
-const { pathWrapper, defaultHandlerWrapper } = require('./next-wrapper')
+const {nextHandlerWrapper} = require('./next-wrapper')
 
 const dev = process.env.NODE_ENV !== 'production'
 require('dotenv').config()
 
 const app = next({dev})
+const port = process.env.PORT || 3000
 const server = new Hapi.Server({
-  connections: {
-    state: {
-      strictHeader: false
-    }
-  }
+  port
 })
 
 // Use native promises
@@ -46,44 +43,42 @@ const validate = (request, username, password, cb) => {
 }
 
 app.prepare()
-.then(() => {
-  server.connection({port: process.env.PORT || 3000})
-  server.register(pluginOptions)
-  server.register(HapiBasicAuth)
-  .then(() => {
-    server.auth.strategy('simple', 'basic', {validateFunc: validate})
+.then(async () => {
+  await server.register(HapiBasicAuth)
 
-    // Uncomment to force SSL
-    // if (process.env.NODE_ENV === 'production') {
-    //   server.register({
-    //     register: HapiRequireHttps
-    //   })
-    // }
+  server.auth.strategy('simple', 'basic', {validate})
 
-    server.route({
-      method: 'POST',
-      path: '/api/response',
-      handler: responseHandler
+  if (process.env.NODE_ENV === 'production') {
+    await server.register({
+      plugin: HapiRequireHttps,
+      options: {}
     })
+  }
 
-    server.route({
-      method: 'GET',
-      path: '/responses.csv',
-      config: {auth: 'simple'},
-      handler: exportResponses
-    })
-
-    server.route({
-      method: 'GET',
-      path: '/{p*}', /* Catch all route */
-      handler: defaultHandlerWrapper(app)
-    })
-
-    server.start().catch(err => {
-      console.log('Error starting server')
-      console.log(err)
-    }).then(() => {
-      console.log('> Ready on http://localhost:3000')
-    })
+  server.route({
+    method: 'POST',
+    path: '/api/response',
+    handler: responseHandler
   })
+
+  server.route({
+    method: 'GET',
+    path: '/export',
+    config: {auth: 'simple'},
+    handler: exportResponses
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/{p*}', /* Catch all route */
+    handler: nextHandlerWrapper(app)
+  })
+
+  try {
+    await server.start()
+    console.log(`> Ready on http://localhost:${port}`)
+  } catch (err) {
+    console.log('Error starting server')
+    console.log(err)
+  }
 })

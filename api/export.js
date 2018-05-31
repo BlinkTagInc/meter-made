@@ -1,4 +1,4 @@
-const json2csv = require('json2csv')
+const json2csv = require('json2csv').parse
 
 const Response = require('../models/response')
 const strategies = require('../data/strategies')
@@ -16,10 +16,7 @@ module.exports = (request, reply) => {
       'userAgent'
     ].concat(strategies.map(strategy => strategy.key))
 
-    return json2csv({
-      data: responses,
-      fields: fieldNames
-    }, (err, csv) => {
+    return json2csv(responses, {fields: fieldNames}, (err, csv) => {
       if (err) {
         return reply(err)
       }
