@@ -34,7 +34,7 @@
     "xo": "0.22.0"
   },
   "engines": {
-    "node": "10.15.2"
+    "node": "10.16.3"
   },
   "private": true,
   "scripts": {
