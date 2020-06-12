@@ -1,54 +1,65 @@
 {
   "name": "metermade",
   "author": "Brendan Nee <brendan@blinktag.com>",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "xo"
+  },
   "dependencies": {
-    "autoprefixer": "9.1.3",
-    "babel-plugin-module-resolver": "3.1.1",
-    "babel-plugin-wrap-in-js": "1.1.1",
-    "bootstrap-sass": "3.3.7",
-    "classnames": "2.2.6",
-    "dotenv": "6.0.0",
-    "es6-promise": "4.2.4",
-    "font-awesome": "^4.7.0",
-    "glob": "7.1.3",
-    "good": "8.1.1",
-    "good-console": "7.1.0",
-    "hapi": "17.5.4",
-    "hapi-auth-basic": "5.0.0",
-    "hapi-require-https": "3.0.0",
-    "isomorphic-fetch": "2.2.1",
-    "json2csv": "4.2.1",
-    "mongoose": "5.2.12",
-    "next": "6.1.1",
-    "node-sass": "4.9.3",
-    "normalize.css": "8.0.0",
-    "postcss-easy-import": "3.0.0",
-    "postcss-loader": "3.0.0",
-    "raw-loader": "0.5.1",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
-    "sass-loader": "7.1.0"
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-brands-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.10",
+    "basic-auth": "^2.0.1",
+    "bootstrap": "^4.5.0",
+    "classnames": "^2.2.6",
+    "es6-promise": "^4.2.8",
+    "json2csv": "^5.0.1",
+    "mongoose": "^5.9.18",
+    "next": "latest",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-dom": "^16.13.1",
+    "styled-jsx-plugin-sass": "^1.0.0",
+    "tsscmp": "^1.0.6"
   },
   "devDependencies": {
-    "xo": "0.22.0"
+    "eslint-config-xo-nextjs": "^1.6.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "xo": "^0.32.0"
   },
   "engines": {
-    "node": "12.15.0"
-  },
-  "private": true,
-  "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "node server.js"
+    "node": "12.18.0"
   },
   "xo": {
     "esnext": true,
-    "semicolon": false,
-    "space": true
-  },
-  "cacheDirectories": [
-    "nextjs/node_modules"
-  ],
-  "heroku-run-build-script": true
+    "space": true,
+    "rules": {
+      "camelcase": [
+        "error",
+        {
+          "properties": "never"
+        }
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "no-unused-vars": [
+        "error",
+        {
+          "varsIgnorePattern": "^[A-Z]"
+        }
+      ],
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  }
 }

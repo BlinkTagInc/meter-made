@@ -18,7 +18,7 @@ export default class Dashboard extends React.Component {
     return (
       <div className={classNames('dashboard', this.props.budgetRemaining === 0 ? 'slide-hide' : '')}>
         <div className="row">
-          <div className="col-sm-5 col-sm-offset-1">
+          <div className="col-sm-5 offset-sm-1">
             <h2 className="remaining-budget-text">{this.getRemainingBudgetText()}</h2>
           </div>
           <div className="col-sm-5">
@@ -30,7 +30,7 @@ export default class Dashboard extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-12 text-center">
+          <div className="col-sm-12 text-center mt-3">
             <h2>Select a meter to get started</h2>
           </div>
         </div>

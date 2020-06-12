@@ -6,11 +6,13 @@ const strategyModels = strategies.reduce((memo, strategy) => {
   return memo
 }, {})
 
-const Response = mongoose.model('response', new mongoose.Schema(Object.assign({
+const surveySchema = new mongoose.Schema({
   id: String,
   timestamp: String,
   ip: String,
-  userAgent: String
-}, strategyModels)))
+  userAgent: String,
+  language: String,
+  ...strategyModels
+})
 
-module.exports = Response
+module.exports = mongoose.models.survey || mongoose.model('survey', surveySchema)

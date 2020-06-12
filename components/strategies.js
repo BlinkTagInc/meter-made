@@ -2,9 +2,10 @@ import Dashboard from './dashboard'
 import strategies from '../data/strategies'
 import Strategy from './strategy'
 import classNames from 'classnames'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
 
 require('es6-promise').polyfill()
-require('isomorphic-fetch')
 
 export default class Strategies extends React.Component {
   constructor(props) {
@@ -72,9 +73,12 @@ export default class Strategies extends React.Component {
         submitting: true
       })
 
-      fetch('/api/response', {
+      fetch('/api/save-survey', {
         method: 'post',
-        body: JSON.stringify(this.state.selectedStrategies)
+        body: JSON.stringify(this.state.selectedStrategies),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
       .then(response => response.json())
       .then(this.handleResponse)
@@ -118,7 +122,7 @@ export default class Strategies extends React.Component {
 
         <form onSubmit={this.submit}>
           <div className="row strategy-list">
-            <div className="col-sm-10 col-sm-offset-1">
+            <div className="col-sm-10 offset-sm-1">
               {strategies.map(strategy => (
                 <Strategy
                   key={strategy.key}
@@ -132,10 +136,10 @@ export default class Strategies extends React.Component {
           </div>
 
           <div className={classNames('row', 'results', this.state.budgetRemaining ? 'slide-hide' : '')}>
-            <div className="col-xs-10 col-xs-offset-1">
+            <div className="col-sm-10 offset-sm-1">
               <div className="container-fluid">
                 <div className="row">
-                  <div className="col-sm-12 text-center">
+                  <div className="col-sm-12 text-center mt-3 mb-1">
                     <h2>How did you improve transportation in Atlanta?</h2>
                   </div>
                 </div>
@@ -146,19 +150,17 @@ export default class Strategies extends React.Component {
                     <div>Share your score</div>
                     <div className="share-buttons">
                       <a href={`https://twitter.com/share?url=https%3A%2F%2Fmetermade.herokuapp.com&text=${this.formatTwitterText()}&via=intercitytransi`} className="btn btn-dark" target="_blank">
-                        <i className="fa fa-twitter" aria-hidden="true"></i><br />
-                        Twitter
+                        <FontAwesomeIcon icon={faTwitter} style={{ height: '20px' }} /> Twitter
                       </a>
                       <a href="http://www.facebook.com/sharer.php?t=How%20would%20you%20improve%20transportation%20in%20Atlanta%3F&u=https%3A%2F%2Fmetermade.herokuapp.com" className="btn btn-dark" target="_blank">
-                        <i className="fa fa-facebook" aria-hidden="true"></i><br />
-                        Facebook
+                        <FontAwesomeIcon icon={faFacebook} size="lg" style={{ height: '20px' }} /> Facebook
                       </a>
                     </div>
                   </div>
                   <div className="col-sm-4 text-center summary-meter-container">
                     <div className="summary-meter">
-                      <img className="summary-meter-value" src="/static/images/meters-white-02.svg" alt="" style={{transform: `rotate(${this.getScoreRotation()}deg)`}} />
-                      <img src="/static/images/meters-white-01.svg" alt="" />
+                      <img className="summary-meter-value" src="/images/meters-white-02.svg" alt="" style={{transform: `rotate(${this.getScoreRotation()}deg)`}} />
+                      <img src="/images/meters-white-01.svg" alt="" />
                     </div>
                     <div className="summary-meter-text">Compared to other plans</div>
                   </div>

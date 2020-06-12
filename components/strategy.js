@@ -31,8 +31,8 @@ export default class Strategy extends React.Component {
     return (
       <button className="strategy" onClick={this.increment}>
         <div className={classNames(this.getStrategyFundingClass(), 'strategy-meter')}>
-          <img className="strategy-meter-value" src="/static/images/meters-02.svg" alt="" />
-          <img src="/static/images/meters-01.svg" alt="" />
+          <img className="strategy-meter-value" src="/images/meters-02.svg" alt="" />
+          <img src="/images/meters-01.svg" alt="" />
           <div className={classNames('strategy-meter-handle', {twisted: this.props.twisted})} />
         </div>
         <div className="strategy-title">{ strategy.title }</div>

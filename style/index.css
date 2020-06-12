@@ -1,0 +1,449 @@
+/* ensure all pages have Bootstrap CSS */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+body {
+  background: #EDE9E0;
+  font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Homenaje', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+.btn-dark {
+  background: #0D153A;
+  color: #ffffff;
+}
+
+.btn-dark:hover {
+  background: #121d4f;
+  color: #ffffff;
+}
+
+.btn-dark:disabled {
+  color: #697ddd;
+}
+
+header {
+  background: #0D153A;
+}
+
+header .logo {
+  float: right;
+  width: 120px;
+  height: 36px;
+  margin: 35px 0 0;
+}
+
+header .title {
+  margin: 0;
+  float: left;
+  color: #ffffff;
+  font-size: 40px;
+  line-height: 102px;
+}
+
+@media (min-width: 768px) {
+  header .logo {
+    width: 206px;
+    height: 63px;
+    margin: 20px 0;
+  }
+
+  header .title {
+    font-size: 54px;
+  }
+}
+
+.strategies {
+  background-image: linear-gradient(110deg, #EDE9E0 11%, #D6D2C8 85%);
+}
+
+.strategies .strategy-list {
+  max-width: 766px;
+  margin-bottom: 20px;
+}
+
+.strategies .strategy {
+  display: inline-block;
+  padding: 5px 20px 5px 0;
+  width: 50%;
+  text-align: left;
+  border: none;
+  background: none;
+}
+
+.strategies .strategy .strategy-meter {
+  width: 48px;
+  height: 80px;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.strategies .strategy .strategy-meter img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.strategies .strategy .strategy-meter .strategy-meter-value {
+  top: 1px;
+  transition: -webkit-transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+  transition: transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+  transition: transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39), -webkit-transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+  width: 48px;
+  height: 48px;
+}
+
+.strategies .strategy .strategy-meter.strategy-funding-zero .strategy-meter-value {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.strategies .strategy .strategy-meter.strategy-funding-one .strategy-meter-value {
+  -webkit-transform: rotate(216deg);
+  transform: rotate(216deg);
+}
+
+.strategies .strategy .strategy-meter.strategy-funding-two .strategy-meter-value {
+  -webkit-transform: rotate(252deg);
+  transform: rotate(252deg);
+}
+
+.strategies .strategy .strategy-meter.strategy-funding-three .strategy-meter-value {
+  -webkit-transform: rotate(288deg);
+  transform: rotate(288deg);
+}
+
+.strategies .strategy .strategy-meter.strategy-funding-four .strategy-meter-value {
+  -webkit-transform: rotate(324deg);
+  transform: rotate(324deg);
+}
+
+.strategies .strategy .strategy-meter.strategy-funding-five .strategy-meter-value {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.strategies .strategy .strategy-meter .strategy-meter-handle {
+  top: 30px;
+  left: 29.5px;
+  width: 3px;
+  height: 20px;
+  background: #E2DED5;
+  position: absolute;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  transition: -webkit-transform 400ms linear;
+  transition: transform 400ms linear;
+  transition: transform 400ms linear, -webkit-transform 400ms linear;
+}
+
+.strategies .strategy .strategy-meter .strategy-meter-handle.twisted {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.strategies .strategy .strategy-title {
+  margin-top: 16px;
+  font-size: 10px;
+}
+
+.results {
+  height: 600px;
+  overflow: hidden;
+  transition: height 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+}
+
+.results.slide-hide {
+  height: 0;
+}
+
+.results h2 {
+  font-size: 24px;
+}
+
+.results .score {
+  font-size: 80px;
+}
+
+.results .score-summary {
+  margin: 30px 0 20px;
+}
+
+.results .try-again-buttom {
+  margin-bottom: 20px;
+}
+
+.results .score-container {
+  margin-top: 20px;
+}
+
+.results .summary-meter-container {
+  overflow: hidden;
+}
+
+.results .summary-meter {
+  width: 48px;
+  height: 80px;
+  margin: 30px 0 0 20px;
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+
+.results .summary-meter img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.results .summary-meter .summary-meter-value {
+  top: 1px;
+  fill: #0D153A;
+  transition: -webkit-transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+  transition: transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+  transition: transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39), -webkit-transform 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+  width: 48px;
+  height: 48px;
+}
+
+.results .summary-meter-text {
+  margin-top: 60px;
+  float: right;
+  width: 122px;
+}
+
+.results .share-buttons {
+  margin-top: 15px;
+}
+
+.results .share-buttons .btn:first-child {
+  margin-right: 10px;
+}
+
+@media (min-width: 375px) {
+  .strategies .strategy .strategy-title {
+    font-size: 14px;
+  }
+
+  .results h2 {
+    font-size: 30px;
+  }
+
+  .results .summary-meter-text {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .strategies .strategy-list {
+    margin: 0 auto 20px;
+  }
+
+  .strategies .strategy {
+    text-align: center;
+    margin: 16px 13px 4px;
+    width: 120px;
+  }
+
+  .strategies .strategy .strategy-meter {
+    width: 105px;
+    height: 173px;
+    margin: 0 auto 8px;
+  }
+
+  .strategies .strategy .strategy-meter .strategy-meter-handle {
+    top: 66px;
+    left: 63.7px;
+    width: 7.4px;
+    height: 41px;
+  }
+
+  .strategies .strategy .strategy-meter .strategy-meter-value {
+    width: 105px;
+    height: 105px;
+  }
+
+  .strategies .strategy .strategy-title {
+    margin-top: 0;
+  }
+
+  .results {
+    height: 333px;
+  }
+
+  .results .score {
+    font-size: 100px;
+  }
+
+  .results .score-summary {
+    margin: 50px 0 20px;
+  }
+
+  .results .summary-meter {
+    width: 108px;
+    height: 173px;
+    margin: 0 auto 8px;
+    float: none;
+  }
+
+  .results .summary-meter .summary-meter-value {
+    width: 108px;
+    height: 108px;
+  }
+
+  .results .summary-meter-text {
+    margin-top: 0;
+    float: none;
+  }
+}
+
+.dashboard {
+  transition: height 400ms cubic-bezier(0.91, 0.45, 0.71, 1.39);
+  overflow: hidden;
+  height: 126px;
+}
+
+.dashboard.slide-hide {
+  height: 0;
+}
+
+.dashboard h2 {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.dashboard .coins-remaining {
+  margin: 20px 0 10px;
+  text-align: center;
+}
+
+.dashboard .remaining-budget-text {
+  padding-top: 19px;
+  text-align: center;
+}
+
+.dashboard .coin {
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  background: #3ABADB;
+  display: inline-block;
+  margin-left: 16px;
+}
+
+.dashboard .coin:after {
+  content: '$1';
+  line-height: 26px;
+  width: 26px;
+  text-align: center;
+  display: block;
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .dashboard {
+    height: 116px;
+  }
+
+  .dashboard h2 {
+    font-size: 26px;
+  }
+
+  .dashboard .remaining-budget-text {
+    text-align: right;
+  }
+
+  .dashboard .coins-remaining {
+    text-align: left;
+  }
+}
+
+.introduction {
+  background: #3ABADB;
+  color: #ffffff;
+  background-image: linear-gradient(135deg, #3ABADB 55%, #3194AD 100%);
+}
+
+.introduction .introduction-text {
+  padding: 10px 0 0;
+}
+
+.introduction .example-image {
+  margin: 10px 0;
+}
+
+.introduction .example-text {
+  font-size: 12px;
+  max-width: 240px;
+  margin: 0 auto 20px;
+}
+
+.results {
+  background: #3ABADB;
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .introduction .introduction-text {
+    padding-bottom: 20px;
+  }
+
+  .introduction .example-image {
+    margin-top: 30px;
+  }
+}
+
+footer {
+  background: #0D153A;
+}
+
+footer .logo {
+  float: left;
+  width: 120px;
+  height: 36px;
+  margin: 35px 0 0;
+}
+
+footer .title {
+  margin: 0;
+  float: right;
+  color: #ffffff;
+  font-size: 40px;
+  line-height: 102px;
+}
+
+@media (min-width: 768px) {
+  footer .logo {
+    width: 206px;
+    height: 63px;
+    margin: 20px 0;
+  }
+
+  footer .title {
+    font-size: 54px;
+  }
+}
