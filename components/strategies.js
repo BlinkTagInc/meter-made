@@ -21,7 +21,7 @@ export default class Strategies extends React.Component {
 
     this.increment = strategyKey => {
       if (this.state.budgetRemaining <= 0) {
-        return;
+        return
       }
 
       const budgetRemaining = this.state.budgetRemaining - 1
@@ -80,9 +80,9 @@ export default class Strategies extends React.Component {
           'Content-Type': 'application/json'
         }
       })
-      .then(response => response.json())
-      .then(this.handleResponse)
-      .catch(this.handleError)
+        .then(response => response.json())
+        .then(this.handleResponse)
+        .catch(this.handleError)
     }
   }
 
@@ -96,9 +96,13 @@ export default class Strategies extends React.Component {
   getScoreSummary() {
     if (this.state.totalScore <= 75) {
       return 'Looks like you have some room for improvement. Give it another shot!'
-    } else if (this.state.totalScore <= 135) {
+    }
+
+    if (this.state.totalScore <= 135) {
       return 'That\'s pretty good, but we bet you can do better!'
-    } else if (this.state.totalScore <= 174) {
+    }
+
+    if (this.state.totalScore <= 174) {
       return 'Great work!'
     }
 
@@ -159,7 +163,7 @@ export default class Strategies extends React.Component {
                   </div>
                   <div className="col-sm-4 text-center summary-meter-container">
                     <div className="summary-meter">
-                      <img className="summary-meter-value" src="/images/meters-white-02.svg" alt="" style={{transform: `rotate(${this.getScoreRotation()}deg)`}} />
+                      <img className="summary-meter-value" src="/images/meters-white-02.svg" alt="" style={{ transform: `rotate(${this.getScoreRotation()}deg)` }} />
                       <img src="/images/meters-white-01.svg" alt="" />
                     </div>
                     <div className="summary-meter-text">Compared to other plans</div>

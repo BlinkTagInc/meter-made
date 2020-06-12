@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Strategies from './strategies'
 
-export default ({children}) => (
+export default ({ children }) => (
   <div>
     <Head>
       <title>Meter Made Atlanta</title>

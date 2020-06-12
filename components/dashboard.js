@@ -11,6 +11,7 @@ export default class Dashboard extends React.Component {
     if (this.props.budgetRemaining <= 0) {
       return 'No budget remaining'
     }
+
     return `You have $${this.props.budgetRemaining} Remaining`
   }
 
@@ -23,7 +24,7 @@ export default class Dashboard extends React.Component {
           </div>
           <div className="col-sm-5">
             <div className="coins-remaining">
-              {[...Array(this.props.budgetRemaining)].map((empty, idx) => (
+              {[...new Array(this.props.budgetRemaining)].map((empty, idx) => (
                 <div className="coin" key={idx} />
               ))}
             </div>

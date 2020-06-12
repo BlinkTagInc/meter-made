@@ -20,7 +20,7 @@ export default async (request, response) => {
 
     strategies.forEach(strategy => {
       console.log(request.body)
-      survey[strategy.key] = parseInt(request.body[strategy.key], 10)
+      survey[strategy.key] = Number.parseInt(request.body[strategy.key], 10)
     })
 
     console.log(survey)
