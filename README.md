@@ -16,11 +16,11 @@ On OS X, if you have brew installed:
 
 ### Install dependencies
 
-    npm install
+    yarn
 
 ### Create a .env file
 
-Create a file in the project root called `.env`. Setup values for `MONGODB_URI`, `ADMIN_USERNAME`, and `ADMIN_PASSWORD`.
+Create a file in the project root called `.env.local`. Setup values for `MONGODB_URI`, `ADMIN_USERNAME`, and `ADMIN_PASSWORD`.
 
     MONGODB_URI=mongodb://127.0.0.1:27017/yoursurveydatabase
     ADMIN_USERNAME=username
@@ -35,7 +35,7 @@ The `ADMIN_USERNAME` and `ADMIN_PASSWORD` are used for bulk .csv export of surve
 
 ### In a new tab, run the app
 
-    npm run dev
+    yarn dev
 
 ### Open your browser and visit:
 
@@ -47,7 +47,7 @@ While running the app, visit:
 
     http://localhost:3000/responses.csv
 
-The username and password are defined in the `.env` file.
+The username and password are defined in the `.env.local` file.
 
 
 ## License
