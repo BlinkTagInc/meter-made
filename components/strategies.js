@@ -33,7 +33,7 @@ export default class Strategies extends React.Component {
       })
 
       if (budgetRemaining <= 0) {
-        if (process.env.SAVE_RESPONSES !== 'false') {
+        if (process.env.NEXT_PUBLIC_SAVE_RESPONSES !== 'false') {
           this.postData()
         }
 
