@@ -33,7 +33,9 @@ export default class Strategies extends React.Component {
       })
 
       if (budgetRemaining <= 0) {
-        this.postData()
+        if (process.env.SAVE_RESPONSES !== 'false') {
+          this.postData()
+        }
 
         this.setState({
           totalScore: this.getTotalScore()

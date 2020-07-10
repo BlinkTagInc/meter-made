@@ -25,6 +25,7 @@ Create a file in the project root called `.env`. Setup values for `MONGODB_URI`,
     MONGODB_URI=mongodb://127.0.0.1:27017/yoursurveydatabase
     ADMIN_USERNAME=username
     ADMIN_PASSWORD=securepassword
+    SAVE_RESPONSES=true
 
 The `ADMIN_USERNAME` and `ADMIN_PASSWORD` are used for bulk .csv export of survey responses.
 
