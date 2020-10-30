@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Dashboard from './dashboard'
 import strategies from '../data/strategies'
 import Strategy from './strategy'

@@ -1,3 +1,5 @@
+import React from 'react'
+
 import strategies from '../data/strategies'
 import classNames from 'classnames'
 
