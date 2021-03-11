@@ -10,31 +10,31 @@
     "test": "xo"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-brands-svg-icons": "^5.15.1",
-    "@fortawesome/react-fontawesome": "^0.1.12",
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "basic-auth": "^2.0.1",
-    "bootstrap": "^4.5.3",
+    "bootstrap": "^4.6.0",
     "classnames": "^2.2.6",
     "es6-promise": "^4.2.8",
-    "json2csv": "^5.0.3",
-    "mongoose": "^5.10.11",
-    "next": "^10.0.0",
-    "node-sass": "^4.14.1",
+    "json2csv": "^5.0.6",
+    "mongoose": "^5.11.19",
+    "next": "^10.0.8",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
+    "react-bootstrap": "^1.5.1",
     "react-dom": "^17.0.1",
     "styled-jsx-plugin-sass": "^1.0.0",
     "tsscmp": "^1.0.6"
   },
   "devDependencies": {
-    "eslint-config-xo-nextjs": "^1.6.0",
-    "eslint-plugin-react": "^7.21.5",
+    "eslint-config-xo-nextjs": "^2.0.2",
+    "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "xo": "^0.34.1"
+    "xo": "^0.38.2"
   },
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "xo": {
     "esnext": true,

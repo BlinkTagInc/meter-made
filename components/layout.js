@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Strategies from './strategies'
 
-export default ({ children }) => (
+const Layout = ({ children }) => (
   <div>
     <Head>
       <title>Meter Made Atlanta</title>
@@ -65,3 +65,5 @@ export default ({ children }) => (
     </div>
   </div>
 )
+
+export default Layout
