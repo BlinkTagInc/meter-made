@@ -10,16 +10,16 @@
     "test": "xo"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-brands-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "basic-auth": "^2.0.1",
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^5.1.0",
     "classnames": "^2.3.1",
     "es6-promise": "^4.2.8",
     "json2csv": "^5.0.6",
-    "mongoose": "^5.13.0",
-    "next": "^11.0.1",
+    "mongoose": "^5.13.6",
+    "next": "^11.1.0",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
@@ -31,7 +31,7 @@
     "eslint-config-xo-nextjs": "^3.2.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "xo": "^0.40.3"
+    "xo": "^0.44.0"
   },
   "engines": {
     "node": "14.x"
