@@ -33,9 +33,6 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "xo": "^0.48.0"
   },
-  "engines": {
-    "node": "18.x"
-  },
   "xo": {
     "esnext": true,
     "space": true,
